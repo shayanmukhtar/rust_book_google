@@ -1,6 +1,7 @@
 mod arrays;
 mod references;
 mod user_types;
+mod pattern_matching;
 
 use std::char;
 
@@ -84,4 +85,25 @@ fn main() {
     println!("Created player move was {player_move:?}");
 
     println!("The constant cadence was {}", user_types::CADENCE_MS);
+
+    println!("Elevator exercise");
+    println!(
+        "A ground floor passenger has pressed the up button: {:?}",
+        user_types::lobby_call_button_pressed(0, user_types::Direction::Up)
+    );
+    println!("The car has arrived on the ground floor: {:?}", user_types::car_arrived(0));
+    println!("The car door opened: {:?}", user_types::car_door_opened());
+    println!(
+        "A passenger has pressed the 3rd floor button: {:?}",
+        user_types::car_floor_button_pressed(3)
+    );
+    println!("The car door closed: {:?}", user_types::car_door_closed());
+    println!("The car has arrived on the 3rd floor: {:?}", user_types::car_arrived(3));
+
+    println!("Pattern Matching");
+    pattern_matching::simple_match();
+
+    pattern_matching::destructure_foo();
+
+    pattern_matching::match_on_enum();
 }

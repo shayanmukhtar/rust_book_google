@@ -47,7 +47,7 @@ pub fn get_task_cadence() -> TaskCadenceMs {
 // of the enum itself) that stores what type a particular variant is. This is 
 // because the variants of an enum can all have a different "type"
 #[derive(Debug)]
-pub enum Direction {
+pub enum Directional {
     Left,
     Right,
 }
@@ -58,7 +58,7 @@ pub enum Direction {
 #[derive(Debug)]
 pub enum PlayerMove {
     Pass,
-    Run(Direction),
+    Run(Directional),
     Teleport{ x: i32, y: i32},
 }
 // PlayerMove is more interesting - here we have three variants: Pass,
@@ -68,7 +68,7 @@ pub enum PlayerMove {
 // actually on my macbook air m3, it shows as having a sizeof 12 bytes
 // with 4 byte alignment
 pub fn create_player_move() -> PlayerMove {
-    let player_move: PlayerMove = PlayerMove::Run(Direction::Left);
+    let player_move: PlayerMove = PlayerMove::Run(Directional::Left);
     player_move
 }
 
@@ -76,3 +76,46 @@ pub fn create_player_move() -> PlayerMove {
 // not necessarily part of const memory like they are in c.
 // Does this waste a lot of space? 
 pub const CADENCE_MS: u32 = 100;
+
+// elevator exercise
+#[derive(Debug)]
+/// An event in the elevator system that the controller must react to.
+pub enum Event {
+    Arrived(i32),           // the car has arrived on the given floor
+    DoorOpen,               // the car doors have opened
+    DoorClosed,             // the car doors have closed
+    Call(i32, Direction),   // a directional button was pressed in an elevator lobby on the given floor
+    FloorButton(i32),       // a floor button was pressed in the elevator car
+}
+
+/// A direction of travel.
+#[derive(Debug)]
+pub enum Direction {
+    Up,
+    Down,
+}
+
+/// The car has arrived on the given floor.
+pub fn car_arrived(floor: i32) -> Event {
+    Event::Arrived(floor)
+}
+
+/// The car doors have opened.
+pub fn car_door_opened() -> Event {
+    Event::DoorOpen
+}
+
+/// The car doors have closed.
+pub fn car_door_closed() -> Event {
+    Event::DoorClosed
+}
+
+/// A directional button was pressed in an elevator lobby on the given floor.
+pub fn lobby_call_button_pressed(floor: i32, dir: Direction) -> Event {
+    Event::Call(floor, dir)
+}
+
+/// A floor button was pressed in the elevator car.
+pub fn car_floor_button_pressed(floor: i32) -> Event {
+    Event::FloorButton(floor)
+}
