@@ -4,6 +4,8 @@ mod user_types;
 
 use std::char;
 
+use user_types::Point;
+
 // simple mapping of the function from arrays.rs
 // note we don't need crate here
 use crate::arrays::declare_array;
@@ -69,4 +71,17 @@ fn main() {
     };
 
     user_types::describe(&charlie);
+
+    let p1: Point = user_types::Point(3, 5);
+    let p2: Point = user_types::Point(4, 3);
+    let p3 = user_types::add_points(&p1, &p2);
+    println!("New Point: ({}, {})", p3.0, p3.1);
+
+    let task_cadence = user_types::get_task_cadence();
+    println!("The task cadence is: {}ms", task_cadence.0);
+
+    let player_move: user_types::PlayerMove = user_types::create_player_move();
+    println!("Created player move was {player_move:?}");
+
+    println!("The constant cadence was {}", user_types::CADENCE_MS);
 }
