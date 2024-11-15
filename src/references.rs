@@ -1,5 +1,5 @@
 use core::slice;
-use std::arch::x86_64;
+
 
 pub fn example() {
     // both of these are of type char
