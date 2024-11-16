@@ -57,3 +57,4 @@ pub fn match_on_enum() {
         Result::Err(error)   => {println!("Something went wrong: {error}")},
     }
 }
+
