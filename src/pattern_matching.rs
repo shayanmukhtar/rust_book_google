@@ -58,3 +58,34 @@ pub fn match_on_enum() {
     }
 }
 
+// figuring out `if let` way of doing things
+fn foo(number: i32) {
+    println!("Foo called with {number}");
+}
+
+pub fn exploring_if_let() {
+    // let's say we're using the Result type again from above,
+    // and we want to call a function if the result is Ok, otherwise
+    // not
+    let our_result: Result = Result::Ok(42);
+
+    // now we can do the whole match thing and call foo
+    // if the result is ok
+    match our_result {
+        Result::Err(_error)      => {},
+        Result::Ok(number)         => {foo(number)}
+    }
+
+    // but there is a cleaner way - in cases like this, where
+    // a single match arm produces the results we want, we can
+    // combine an if and a pattern match together in one statement
+    // like this:
+    let our_result: Result = Result::Ok(42);
+    
+    if let Result::Ok(number) = our_result {
+        foo(number);
+    }
+    // basically this was a pattern match - if `our_result` matches
+    // the pattern `Result::Ok(number)` then bind number to a variable,
+    // and enter the if condition
+}

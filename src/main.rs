@@ -2,8 +2,7 @@ mod arrays;
 mod references;
 mod user_types;
 mod pattern_matching;
-
-use std::char;
+mod epression_evaluation;
 
 use user_types::Point;
 
@@ -106,4 +105,6 @@ fn main() {
     pattern_matching::destructure_foo();
 
     pattern_matching::match_on_enum();
+
+    pattern_matching::exploring_if_let();
 }
