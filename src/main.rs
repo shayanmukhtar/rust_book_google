@@ -3,7 +3,11 @@ mod references;
 mod user_types;
 mod pattern_matching;
 mod epression_evaluation;
-mod methods;    
+mod methods;
+mod traits;
+mod logger_exercise;
+mod generics;
+mod generic_min;
 
 use user_types::Point;
 
@@ -108,4 +112,28 @@ fn main() {
     pattern_matching::match_on_enum();
 
     pattern_matching::exploring_if_let();
+
+    traits::create_dog();
+
+    traits::create_cat();
+
+    traits::test_multiply();
+
+    traits::test_derived_traits();
+
+    logger_exercise::test_logger();
+
+    println!("Picked {}", generics::pick(43, 202, 101));
+    println!("Picked {}", generics::pick(66, "evenString", "OddString"));
+
+    generics::test_generic_types();
+
+    generics::test_generic_impl();
+
+    generics::test_duplicate();
+
+    println!("75 + 42 = {}", generics::add_42(75));
+
+    generic_min::test_generic_min();
+
 }
