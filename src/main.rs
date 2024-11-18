@@ -3,6 +3,7 @@ mod references;
 mod user_types;
 mod pattern_matching;
 mod epression_evaluation;
+mod methods;    
 
 use user_types::Point;
 
