@@ -78,3 +78,4 @@ pub fn the_clean_way() -> Result<(), String> {
 
     Ok(())
 }
+
