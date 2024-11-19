@@ -8,6 +8,7 @@ mod traits;
 mod logger_exercise;
 mod generics;
 mod generic_min;
+mod standard_lib;
 
 use user_types::Point;
 
