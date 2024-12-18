@@ -79,3 +79,48 @@ pub fn the_clean_way() -> Result<(), String> {
     Ok(())
 }
 
+// we can also implement standard traits for normal arithmetic operators, 
+// such as add, subtract, etc
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl std::ops::Add for Point {
+    // why do we use an associated type here? Remember, for generics,
+    // the caller controls the input variables, but for traits we control
+    // the return type
+    type Output = Self;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Point{x: self.x + rhs.x, y: self.y + rhs.y}
+    }
+}
+
+// we could have used a generic for adding a tuple to Point, e.g.
+impl std::ops::Add<(i32, i32)> for Point {
+    type Output = Self;
+
+    fn add(self, rhs: (i32, i32)) -> Self::Output {
+        Point{x: self.x + rhs.0, y: self.y + rhs.1}
+    }
+}
+
+// we can do the same for &Point, which won't consume Point in the add function
+impl std::ops::Add<&Point> for &Point {
+    type Output = Point;
+
+    // self is already &Point type based on function signature
+    fn add(self, rhs: &Point) -> Self::Output {
+        Point{x: self.x + rhs.x, y: self.y + rhs.y}
+    }
+}
+
+// From and Into are useful for conversions and casting - they must be infallible
+// type conversions. When you implement the trait From, Into is automatically
+// generated for you - so the idiomatic way is to implement From only
+// An infallible cast is something like u32 as u64 - this cannot fail, and is 
+// intuitive what the result will be (its lossless). We can also make fallible
+// casts like C, such as u64 as u32 - this truncates the upper 32 bits
+// However, it should be noted, even fallible casts are consistent across platforms.
+// Its usually preferred to use From and Into as they are infallible

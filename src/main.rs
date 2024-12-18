@@ -9,6 +9,9 @@ mod logger_exercise;
 mod generics;
 mod generic_min;
 mod standard_lib;
+mod rot13;
+mod memory_management;
+mod package_builder;
 
 use user_types::Point;
 
@@ -136,5 +139,15 @@ fn main() {
     println!("75 + 42 = {}", generics::add_42(75));
 
     generic_min::test_generic_min();
+
+    rot13::test_rot13();
+
+    memory_management::test_print_string();
+
+    memory_management::test_copy_trait();
+
+    memory_management::test_drop();
+
+    package_builder::test_package_builder();
 
 }
